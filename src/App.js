@@ -3,8 +3,10 @@ import About from "./components/About";
 import Body from "./components/Body";
 import Chat from "./components/Chat";
 import Explore from "./components/Explore";
+import LogIn from "./components/LogIn";
 import NavBar from "./components/NavBar.js";
 import Reminder from "./components/Reminder";
+import SignUp from "./components/SignUp";
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
       <Reminder/>
       <Explore/>
       <Chat/>
+      <LogIn/>
+      <SignUp/>
     </>
   );
 }
