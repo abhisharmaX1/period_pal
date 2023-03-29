@@ -1,31 +1,27 @@
 const express = require("express");
-
 const router = express.Router();
+const {
+  createCycle,
+  getCycles,
+  getCycle,
+  deleteCycle,
+  updateCycle
+} = require('../controllers/cycleController');
 
 // GET all cycles
-router.get("/", (req, res) => {
-  res.json({ msg: "GET all cycles" });
-});
-
-// GET a single cycle
-router.get("/:id", (req, res) => {
-  res.json({ msg: "GET a single cycle" });
-});
+router.get("/", getCycles);
 
 // POST a new cycle
-router.post("/", (req, res) => {
-  res.json({ msg: "POST a new cycle" });
-});
+router.post("/", createCycle);
+
+// GET a single cycle
+router.get("/:id", getCycle);
 
 // DELETE a cycle
-router.delete("/:id", (req, res) => {
-  res.json({ msg: "DELETE a cycle" });
-});
+router.delete("/:id", deleteCycle);
 
 // UPDATE a cycle
-router.patch("/:id", (req, res) => {
-  res.json({ msg: "UPDATE a cycle" });
-});
+router.patch("/:id", updateCycle);
 
 module.exports = router;
 
