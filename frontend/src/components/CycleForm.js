@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useCyclesContext } from "../hooks/useCyclesContext";
 
 const CycleForm = () => {
+  const { dispatch } = useCyclesContext();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [flowIntensity, setFlowIntensity] = useState("");
@@ -23,6 +25,10 @@ const CycleForm = () => {
       setError(json.error);
     }
     if (response.ok) {
+      dispatch({
+        type: "CREATE_CYCLE",
+        payload: json,
+      });
       setError(null);
       setStartDate("");
       setEndDate("");

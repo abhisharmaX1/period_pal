@@ -5,8 +5,8 @@ const {
   getCycles,
   getCycle,
   deleteCycle,
-  updateCycle
-} = require('../controllers/cycleController');
+  updateCycle,
+} = require("../controllers/cycleController");
 
 // GET all cycles
 router.get("/", getCycles);

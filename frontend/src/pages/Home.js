@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // components
 import CycleDetails from "../components/CycleDetails";
 import CycleForm from "../components/CycleForm";
+import { useCyclesContext } from "../hooks/useCyclesContext";
 
 const Home = () => {
-  const [cycles, setCycles] = useState(null);
+  // const [cycles, setCycles] = useState(null);
+  const {cycles, dispatch} = useCyclesContext();
 
   useEffect(() => {
     const fetchCycles = async () => {
@@ -13,7 +15,11 @@ const Home = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setCycles(json);
+        // setCycles(json);
+        dispatch({
+          type: 'SET_CYCLES',
+          payload: json
+        })
       }
     };
     fetchCycles();
