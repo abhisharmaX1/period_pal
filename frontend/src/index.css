@@ -35,18 +35,10 @@ header a {
 /* homepage */
 .home {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 1rem;
+  grid-template-columns: 3fr 1fr; 
+  /* fr means fraction */ /* two fractions means two columns*/
+  gap: 100px;
 }
-
-.cycles {
-  grid-column: 1 / 2;
-}
-
-.cycle-form {
-  grid-column: 1 / 2;
-}
-
 .cycle-details {
   background: #fff;
   border-radius: 4px;
@@ -89,6 +81,11 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+button {
+  border: 0;
+}
+
 form button {
   background: var(--primary);
   border: 0;
@@ -105,4 +102,7 @@ div.error {
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
 }

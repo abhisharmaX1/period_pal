@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useCyclesContext } from "../hooks/useCyclesContext";
 
 const CycleForm = () => {
@@ -7,6 +7,7 @@ const CycleForm = () => {
   const [endDate, setEndDate] = useState("");
   const [flowIntensity, setFlowIntensity] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const CycleForm = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     }
     if (response.ok) {
       dispatch({
@@ -33,6 +35,7 @@ const CycleForm = () => {
       setStartDate("");
       setEndDate("");
       setFlowIntensity("");
+      setEmptyFields([]);
       console.log("new cycle added:", json);
     }
   };
@@ -46,6 +49,7 @@ const CycleForm = () => {
         type="date"
         onChange={(e) => setStartDate(e.target.value)}
         value={startDate}
+        className={emptyFields.includes('Start Date') ? 'error' : ''}
       />
 
       <label>End Date:</label>
@@ -53,6 +57,7 @@ const CycleForm = () => {
         type="date"
         onChange={(e) => setEndDate(e.target.value)}
         value={endDate}
+        className={emptyFields.includes('End Date') ? 'error' : ''}
       />
 
       <label>Flow Intensity (1-5):</label>
@@ -62,6 +67,7 @@ const CycleForm = () => {
         max="5"
         onChange={(e) => setFlowIntensity(e.target.value)}
         value={flowIntensity}
+        className={emptyFields.includes('Flow Intensity') ? 'error' : ''}
       />
 
       <button>Add Cycle</button>

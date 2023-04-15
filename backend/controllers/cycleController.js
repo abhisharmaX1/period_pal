@@ -26,6 +26,24 @@ const getCycle = async (req, res) => {
 // post a cycle
 const createCycle = async (req, res) => {
   const { startDate, endDate, flowIntensity, symptoms } = req.body;
+
+  let emptyFields = [];
+  if (!startDate) {
+    emptyFields.push("Start Date");
+  }
+  if (!endDate) {
+    emptyFields.push("End Date");
+  }
+  if (!flowIntensity) {
+    emptyFields.push("Flow Intensity");
+  }
+
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all the fields", emptyFields: emptyFields });
+  }
+
   try {
     const cycle = await Cycle.create({
       startDate,
@@ -59,14 +77,12 @@ const updateCycle = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid Id" });
   }
-  const cycle = await Cycle.findByIdAndUpdate(id, {...req.body});
+  const cycle = await Cycle.findByIdAndUpdate(id, { ...req.body });
   if (!cycle) {
     return res.status(400).json({ error: "No such cycle" });
   }
   res.status(200).json(cycle);
-}
-
-
+};
 
 module.exports = {
   createCycle,

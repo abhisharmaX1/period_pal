@@ -23,10 +23,10 @@ const Home = () => {
       }
     };
     fetchCycles();
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div className="Home">
+    <div className="home">
       <div className="cycles">
         {cycles &&
           cycles.map((cycle) => <CycleDetails key={cycle._id} cycle={cycle} />)}

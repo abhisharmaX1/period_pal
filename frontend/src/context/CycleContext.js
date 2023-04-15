@@ -14,6 +14,11 @@ export const cyclesReducer = (state, action) => {
         cycles: [action.payload, ...state.cycles],
       };
     }
+    case "DELETE_CYCLE": {
+        return {
+            cycles: state.cycles.filter((cycle) => cycle._id !== action.payload._id)
+        }
+    }
     default: {
       return state;
     }

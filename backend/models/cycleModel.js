@@ -17,9 +17,9 @@ const cycleSchema = new Schema({
     min: 1,
     max: 5,
   },
-  symptoms: {
-    type: [String],
-  },
+  // symptoms: {
+  //   type: [String],
+  // },
 }, {timestamps: true});
 
 const Cycle = mongoose.model("Cycle", cycleSchema);
