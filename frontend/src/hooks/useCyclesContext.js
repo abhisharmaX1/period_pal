@@ -5,7 +5,7 @@ export const useCyclesContext = () => {
   const context = useContext(CyclesContext);
   if (!context) {
     throw Error(
-      "UseCyclesContext must be used inside an CyclesContextProvider"
+      "UseCyclesContext must be used inside a CyclesContextProvider"
     );
   }
   return context;
