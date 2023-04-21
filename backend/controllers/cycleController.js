@@ -1,9 +1,12 @@
 const Cycle = require("../models/cycleModel");
 const mongoose = require("mongoose");
 
+
+
 // get all cycles
 const getCycles = async (req, res) => {
-  const cycles = await Cycle.find({}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+  const cycles = await Cycle.find({user_id}).sort({ createdAt: -1 });
   res.status(200).json(cycles);
 };
 
@@ -26,7 +29,6 @@ const getCycle = async (req, res) => {
 // post a cycle
 const createCycle = async (req, res) => {
   const { startDate, endDate, flowIntensity, symptoms } = req.body;
-
   let emptyFields = [];
   if (!startDate) {
     emptyFields.push("Start Date");
@@ -45,11 +47,13 @@ const createCycle = async (req, res) => {
   }
 
   try {
+    const user_id = req.user._id;
     const cycle = await Cycle.create({
       startDate,
       endDate,
       flowIntensity,
       symptoms,
+      user_id,
     });
     res.status(200).json(cycle);
   } catch (error) {

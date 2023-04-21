@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCyclesContext } from "../hooks/useCyclesContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const CycleForm = () => {
   const { dispatch } = useCyclesContext();
@@ -8,16 +9,23 @@ const CycleForm = () => {
   const [flowIntensity, setFlowIntensity] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const {user} = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const cycle = { startDate, endDate, flowIntensity };
+
+    if (!user) {
+      setError("You must be logged in")
+      return;
+    }
 
     const response = await fetch("/api/cycles", {
       method: "POST",
       body: JSON.stringify(cycle),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${user.token}`
       },
     });
     const json = await response.json();

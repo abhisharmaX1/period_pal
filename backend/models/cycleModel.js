@@ -17,10 +17,14 @@ const cycleSchema = new Schema({
     min: 1,
     max: 5,
   },
+  user_id: {
+    type: String,
+    required: true,
+  }
   // symptoms: {
   //   type: [String],
   // },
-}, {timestamps: true});
+}, { timestamps: true });
 
 const Cycle = mongoose.model("Cycle", cycleSchema);
 

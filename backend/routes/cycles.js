@@ -8,6 +8,11 @@ const {
   updateCycle,
 } = require("../controllers/cycleController");
 
+const requireAuth = require('../middleware/requireAuth');
+
+// require auth for all routes
+router.use(requireAuth);
+
 // GET all cycles
 router.get("/", getCycles);
 

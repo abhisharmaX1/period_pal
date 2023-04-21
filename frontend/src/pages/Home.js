@@ -4,14 +4,20 @@ import React, { useEffect } from "react";
 import CycleDetails from "../components/CycleDetails";
 import CycleForm from "../components/CycleForm";
 import { useCyclesContext } from "../hooks/useCyclesContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Home = () => {
   // const [cycles, setCycles] = useState(null);
   const {cycles, dispatch} = useCyclesContext();
+  const {user} = useAuthContext();
 
   useEffect(() => {
     const fetchCycles = async () => {
-      const response = await fetch("/api/cycles");
+      const response = await fetch("/api/cycles", {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
       const json = await response.json();
 
       if (response.ok) {
@@ -22,8 +28,10 @@ const Home = () => {
         })
       }
     };
-    fetchCycles();
-  }, [dispatch]);
+    if (user) {
+      fetchCycles();
+    }
+  }, [dispatch, user]);
 
   return (
     <div className="home">
