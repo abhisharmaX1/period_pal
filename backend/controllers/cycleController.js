@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 // get all cycles
 const getCycles = async (req, res) => {
   const user_id = req.user._id;
-  const cycles = await Cycle.find({user_id}).sort({ createdAt: -1 });
+  const cycles = await Cycle.find({user_id}).sort({ startDate: -1 });
   res.status(200).json(cycles);
 };
 
