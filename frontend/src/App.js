@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Predict from "./pages/Predict";
+import BlogPage from "./pages/Blog";
 
 function App() {
   const { user } = useAuthContext();
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
             <Route path="/predict" element={user ? <Predict/> : <Navigate to="/login" />} />
+            <Route path="/blog" element={user ? <BlogPage/> : <Navigate to="/login" />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
             <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
           </Routes>

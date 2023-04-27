@@ -136,3 +136,27 @@ form.signup, form.login {
   background: #fff;
   border-radius: 4px;
 }
+
+div.success {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+[type="checkbox"]
+{
+    vertical-align:middle;
+}
+
+.add-blog {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+}
